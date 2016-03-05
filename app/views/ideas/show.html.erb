@@ -1,19 +1,28 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @idea.name %>
+
+<div class="row">
+  <div class="col-md-9 well">
+    <%= image_tag(@idea.picture_url, width: '100%') if @idea.picture.present? %>
+  </div>
+
+  <div class="col-md-3">
+    <p class="alert alert-warning"> <b>NAME: </b><%= @idea.name %></p>
+    <p class="alert alert-info"><b>DESCRIPTION: </b><%= @idea.description %></p>
+    <p>
+      <%= button_tag((link_to 'Edit', edit_idea_path(@idea)),class: 'btn btn-default') %> |
+      <%= button_tag((link_to 'Destroy', @idea, data: { confirm: 'Are you sure?' }, method: :delete),class:'btn btn-danger') %> |
+      <%= button_tag((link_to 'Back', ideas_path), class:'btn') %>
+    </p>
+  </div>
+</div>
+  <h3>Comments</h3>
+<% @comments.each do |comment| %>
+  <div>
+    <strong><%= comment.user_name %></strong>
+    <br />
+    <p><%= comment.body %></p>
+    <p><%= button_tag((link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' }), class: 'btn btn-sdanger') %></p>
+  </div>
+<% end %>
+<%= render 'comments/form' %>
 </p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @idea.description %>
-</p>
-
-<p>
-  <strong>Picture:</strong>
- <%= image_tag(@idea.picture_url, :width => 600) if @idea.picture.present? %>
-</p>
-
-<%= link_to 'Edit', edit_idea_path(@idea) %> |
-<%= link_to 'Back', ideas_path %>

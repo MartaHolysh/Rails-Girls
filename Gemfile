@@ -47,3 +47,4 @@ end
 
 gem 'carrierwave'
 gem 'sqlite3'
+gem 'devise'
